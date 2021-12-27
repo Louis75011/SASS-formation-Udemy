@@ -1,0 +1,66 @@
+// Mes variables SASS
+$primaryColor: darkblue;
+$secondaryColor: darkred;
+
+// Mes mixins
+// Mixin d'arrondissement des bords
+@mixin border-radius($degrees) {
+    border-radius: $degrees;
+}
+
+// Mixin globale pour la police d'écriture unique
+@mixin googleFonts($font) {
+    @import url('https://fonts.googleapis.com/css2?family=#{font}'); // Roboto
+    // Effacer après le égal : Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap
+    // font-family: 'Roboto', sans-serif;
+}
+
+// Définir une directive thème couleur à répéter
+$theme: crimson;
+
+// Importations des sous fichiers dans default.scss
+@import 'header';
+@import 'footer';
+
+// Mon code SCSS imbriqué
+body {
+    // Fonts
+    @include googleFonts(Roboto);
+    // Mise à 0 des marges
+    margin: 0;
+    // Fond complet
+    background-color: lightgray;
+
+    div.center {
+        text-align: center;
+        justify-content: center;
+    }
+
+    div.center h1 {
+        margin-top: 7rem;
+        font-size: 28px;
+    }
+
+    div.center p {
+        font-size: 24px;
+    }
+
+    // Bloc de propriétés à appeler (héritage)
+    %alert {
+        padding: 15px;
+        border: 1px solid black;
+        color: white;
+        @include border-radius(10px);
+    }
+
+    .alert-green {
+        // Récupération d'un bloc de propriétés
+        @extend %alert;
+        background-color: green;
+    }
+
+    .alert-red {
+        @extend %alert;
+        background-color: red;
+    }
+}

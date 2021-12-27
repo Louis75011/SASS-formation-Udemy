@@ -1,0 +1,15 @@
+// Code SCSS du footer
+footer {
+    margin-top: 7rem;
+    padding: 50px;
+    background-color: $theme;
+    @include border-radius(20px);
+
+    span {
+        color: white;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

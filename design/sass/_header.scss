@@ -1,0 +1,22 @@
+// Code SCSS du header
+header {
+    padding: 50px;
+    background-color: $theme;
+
+    @mixin center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #logo {
+        @include center;
+        width: 135px;
+        color: white;
+    }
+
+    #slogan {
+        @include center;
+        width: 150px;
+        color: white;
+    }
+}

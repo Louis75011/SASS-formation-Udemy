@@ -1,0 +1,13 @@
+{
+  "name": "SASS",
+  "version": "1.0.0",
+  "description": "Cours Udemy sur SASS",
+  "main": "SASS.js",
+  "scripts": {
+    "sass": "sass --watch ./design/sass/default.scss:./design/css/default.css --style compressed",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "L. Rouanet",
+  "license": "ISC"
+}
