@@ -1,6 +1,7 @@
 /*
 MES NOTES DU COURS SASS SUR UDEMY (12.2021) :
 https://www.udemy.com/course/sass-scss-la-formation-ultime/learn/
+https://sass-lang.com/documentation
 
 
 Introduction :
@@ -120,8 +121,107 @@ Ressemble à l'héritage mais plus poussé.
 Sur la variable on redéfini à chaque fois les pixels quand on appel la mixin.
 
 
-Les fonctions :
+Une fonction (intégration de POO en général) :
+C'est un sous-programme qui effectue une tâche et permet de renvoyer un résultat. Souvent elle contient un paramètre qui servira à l'exécution de la tâche en cas de récupération dans la fonction.
+
+Un robot pour acheter quelque chose à la boulangerie effectue plusieurs tâches : 1) sort de la maison, 2) ferme la porte, 3) va à la boulangerie, 4)
+prendre une baguette, 5) régler son dû, 6) revenir à la maison (ouvrir/fermer la porte, etc.).
+
+C'est une séries d'instructions. On donne un nom expression, on ajoute peut-être un paramètre, puis on implémente son code.
+
+En SASS, il y a des fonctions natives :
+
+padding: length(15px 10px); // Faire la moyenne du nombre d'élément, donc réponse 2.
+
+content to-upper-case(abcd) // ABCD
+
+Fonctions anonymes : nous créons ici les nôtres propres
+La mixin y ressemble mais ça génère un code, là où la fonction retourne un résultat
+
+@function thewallstreet($nombreA, $nombreB) {
+    @return $nombreA / $nombreB + $nombreA * ($nombreB - $sombreA);
+}
+
+content: thewallstreet(15, 3);
+
+// Appel de la fonction et définition des deux nombres retournées
 
 
+Condition :
+
+Une instruction conditionnelle est une fonction d'un langage de programmation. La condtition renvoyée est booléenne : soit vraie soit fausse !
+
+@if @else @elseif (SI, SINON)
+%colour {
+    color: white;
+    background-color: $colour;
+}
+
+@if (+18) {
+    // Rediriger vers le site
+    color: white;
+    background-color: orange;
+}
+@else {
+    // Rester sur la page
+    color: white;
+    background-color: cyan;
+}
+
+$colour : orange, gray, cyan;
+
+
+Les boucles :
+
+Une structure (en bloc) permettant de répéter des instructions autant de fois qu'une condition est respectée.
+
+En pseudo-code :
+Boucle (suis-je à la dernière page ?) {
+    lire le texte;
+    tourner la page;
+}
+
+Directive @for utilise la boucle for, il y a aussi les deux autres types @while et @each.
+
+Générer toutes mes grilles :
+// i va prendre les valeurs de 1 à 6, et réaliser le width sur chacune contenue dans le i (pour index) :
+
+@for $i from 1 through 6 {
+    .grid-#{$i} {
+        width: 100px*$i;
+    }
+}
+
+La boucle @each prend deux valeurs et est utile lorsqu'il faut récupérer plusieurs images et leurs titres propres. Elle prend chaque valeur dans une boucle.
+
+@each $name in super-img, bootstrap, js {
+    .#{$name}-icon {
+        background-image: url('/img/#{$name}.png');
+    }
+}
+
+$i: = 0;
+@while $i <= 6 {
+    .grid-#{$i} {
+        width: 100px*$i;
+    }
+    $i: $i + 1;
+}
+// Incrémenter sa boucle pour éviter "'l'infini" ! Celle-ci est la plus simple de construction.
+
+
+Ajout dynamique de valeurs :
+$list: banane, peche;
+$fruit: cerise;
+$list: append($list, $fruit, comma); // Fonction d'ajout du fruit à la liste
+
+Liste de couleurs (variable, each, interpollation) :
+
+$mapColor : blue, orange, white, yelow;
+@each $value in $mapColor {
+    .color-#{$value} {
+        color #{$value};
+    }
+}
 
 */

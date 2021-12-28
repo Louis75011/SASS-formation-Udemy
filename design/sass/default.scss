@@ -2,7 +2,41 @@
 $primaryColor: darkblue;
 $secondaryColor: darkred;
 
+// Définir une directive thème couleur à répéter
+$theme: crimson;
+$colour: white; // "" string pour une valeur/variable vide
+
+// Mes héritages
+%colour {
+    @if ($colour==purple) {
+        color: purple;
+        background-color: white;
+    }
+
+    // Si mon fond est en blanc envoyé celui en noir
+    @else if($colour==white) {
+        color: white;
+        background-color: black;
+    }
+
+    @else {
+        color: black;
+        background-color: white;
+    }
+}
+
 // Mes mixins
+// Mixin de recentrage
+@mixin center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Gestion de la marge du haut
+@mixin mt($number) {
+    margin-top: $number;
+}
+
 // Mixin d'arrondissement des bords
 @mixin border-radius($degrees) {
     border-radius: $degrees;
@@ -10,13 +44,13 @@ $secondaryColor: darkred;
 
 // Mixin globale pour la police d'écriture unique
 @mixin googleFonts($font) {
-    @import url('https://fonts.googleapis.com/css2?family=#{font}'); // Roboto
-    // Effacer après le égal : Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap
-    // font-family: 'Roboto', sans-serif;
+    @import url('https://fonts.googleapis.com/css2?family=#{font}'); // Roboto -> effacer le lien après le égal
 }
 
-// Définir une directive thème couleur à répéter
-$theme: crimson;
+// Mes fonctions
+@function thewallstreet($nombreA, $nombreB) {
+    @return $nombreA / $nombreB+$nombreA * ($nombreB - $nombreA);
+}
 
 // Importations des sous fichiers dans default.scss
 @import 'header';
@@ -24,12 +58,15 @@ $theme: crimson;
 
 // Mon code SCSS imbriqué
 body {
+    // Background
+    @extend %colour;
     // Fonts
     @include googleFonts(Roboto);
     // Mise à 0 des marges
     margin: 0;
     // Fond complet
-    background-color: lightgray;
+    // background-color: lightgray;
+    // padding: length(15px 10px); // Fonction native affichant 2, la moyenne des éléments
 
     div.center {
         text-align: center;
@@ -37,30 +74,29 @@ body {
     }
 
     div.center h1 {
-        margin-top: 7rem;
+        @include mt(2em);
         font-size: 28px;
+        background-color: $secondaryColor;
     }
 
     div.center p {
         font-size: 24px;
     }
 
-    // Bloc de propriétés à appeler (héritage)
-    %alert {
-        padding: 15px;
-        border: 1px solid black;
-        color: white;
+    section .grid {
         @include border-radius(10px);
-    }
+        @include mt(1rem);
+        @include center;
+        background-color: $primaryColor;
+        border-right: 5px solid white;
+        align-items: center;
+        border-radius: 10px;
+        text-align: center;
 
-    .alert-green {
-        // Récupération d'un bloc de propriétés
-        @extend %alert;
-        background-color: green;
-    }
-
-    .alert-red {
-        @extend %alert;
-        background-color: red;
+        // Boucle de 6 grilles
+        @for $i from 1 through 6 {
+            width: 100px*$i;
+            height: 10px*$i;
+        }
     }
 }

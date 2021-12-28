@@ -1,22 +1,40 @@
 // Code SCSS du header
 header {
-    padding: 50px;
-    background-color: $theme;
+    padding: 20px;
+    // background-color: $theme;
 
-    @mixin center {
-        margin-left: auto;
-        margin-right: auto;
+    #logo,
+    #slogan {
+        @include mt(1rem);
+        color: white;
+        text-decoration: line-through;
     }
 
     #logo {
-        @include center;
         width: 135px;
-        color: white;
     }
 
     #slogan {
-        @include center;
         width: 150px;
+    }
+
+    // Bloc de propriétés à appeler (héritage)
+    %alert {
+        padding: 15px;
+        border: 1px solid black;
         color: white;
+        text-align: center;
+        @include border-radius(10px);
+    }
+
+    .alert-green {
+        // Récupération d'un bloc de propriétés
+        @extend %alert;
+        background-color: green;
+    }
+
+    .alert-red {
+        @extend %alert;
+        background-color: red;
     }
 }

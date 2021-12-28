@@ -1,8 +1,9 @@
 // Code SCSS du footer
 footer {
-    margin-top: 7rem;
+    @include mt(4rem);
     padding: 50px;
     background-color: $theme;
+    content: thewallstreet(11, 6);
     @include border-radius(20px);
 
     span {
